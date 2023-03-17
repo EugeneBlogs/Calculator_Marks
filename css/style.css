@@ -1,0 +1,149 @@
+:root {
+  --accent-color: rgb(0, 228, 152);
+  --dark-color: #404149;
+  --white-color: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+}
+
+.container {
+  max-width: 1110px;
+  margin: 0 auto;
+}
+
+.header {
+  min-height: 740px;
+  background-image: url(../img/first-screen-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header__title {
+  padding-top: 20px;
+  margin-bottom: 112px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+@media screen and (max-width: 1280px) {
+  .header__title {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.logo {
+  width: 150px;
+  height: 60px;
+}
+
+.burger {
+  width: 50px;
+  height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+  padding: 0;
+  background-color: var(--accent-color);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.burger__line {
+  display: block;
+  width: 21px;
+  height: 3px;
+  background-color: #fff;
+  margin-bottom: 4px;
+}
+
+.burger__line:last-child {
+  margin-bottom: 0;
+}
+
+.h1 {
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 95px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  max-width: 734px;
+  margin: 0 auto 27px;
+  color: var(--white-color);
+}
+
+@media screen and (max-width: 380px) {
+  .h1 {
+    font-size: 46px;
+    line-height: 64px;
+  }
+}
+
+.h4 {
+  font-weight: 400;
+  max-width: 734px;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 auto;
+  color: var(--white-color);
+}
+
+.footer {
+  background-color: var(--dark-color);
+  padding-top: 30px;
+  padding-bottom: 40px;
+  margin-top: 50px;
+}
+
+.footer__flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__flex-left,
+.footer__flex-right {
+  color: var(--white-color);
+}
+
+.footer-p {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
+
+.back_home:link,
+.back_home:visited,
+.back_home:hover,
+.back_home:active {
+  color: white;
+  text-decoration: none
+}
+
+.logo-synopsis {
+  width: 150px;
+  height: 100px;
+}
+
+.title {
+  font-size: 35px;
+  line-height: 95px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  max-width: 734px;
+  margin: 0 auto 27px;
+}
+
+section {
+  margin-top: 20px;
+}
