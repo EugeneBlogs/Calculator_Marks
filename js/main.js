@@ -18,7 +18,7 @@ let tag_list = []
 let mark_list = []
 let coefficient_list = []
 
-document.querySelector('button.add_marks_btn').addEventListener('click', function (e) {
+function AddMark() {
   let t = document.getElementById("tag").value
   let m = document.getElementById("mark").value
   let c = document.getElementById("coefficient").value
@@ -50,12 +50,19 @@ document.querySelector('button.add_marks_btn').addEventListener('click', functio
 <td id="element_${n}_tag">${t}</td>
 <td id="element_${n}_mark">${m}</td>
 <td id="element_${n}_coefficient">${c}</td>
+<td><button class="btn btn-danger" onclick="DeleteElement(${n})">&#10006;</button></td>
 </tr>      
 `)
+tag_list.push(document.getElementById(`element_${n}_tag`).innerHTML)
+mark_list.push(document.getElementById(`element_${n}_mark`).innerHTML)
+coefficient_list.push(document.getElementById(`element_${n}_coefficient`).innerHTML)
   n++
-})
+}
 
-document.querySelector('button.clear_marks_btn').addEventListener('click', function (e) {
+function DeleteElement(num) {
+  tag_list.splice(num-1, 1)
+  mark_list.splice(num-1, 1)
+  coefficient_list.splice(num-1, 1)
   divisible = 0
   divider = 0
   n = 1
@@ -66,20 +73,6 @@ document.querySelector('button.clear_marks_btn').addEventListener('click', funct
   document.getElementById("middle_mark").innerHTML = `Средний балл: 0.`
   document.getElementById("final_mark").innerHTML = `Итоговая оценка: 0.`
   document.getElementById("final_mark").style.color = "black"
-})
-
-document.querySelector('button.add_list_btn').addEventListener('click', function (e) {
-  tag_list = []
-  mark_list = []
-  coefficient_list = []
-  for (let i = 1; i < n; i++) {
-    tag_list.push(document.getElementById(`element_${i}_tag`).innerHTML)
-    mark_list.push(document.getElementById(`element_${i}_mark`).innerHTML)
-    coefficient_list.push(document.getElementById(`element_${i}_coefficient`).innerHTML)
-  }
-  alert(`Список с ${n - 1} оценками сохранён в памяти!`)
-})
-document.querySelector('button.show_list_btn').addEventListener('click', function (e) {
   for (let i = 0; i < mark_list.length; i++) {
     let t = tag_list[i]
     let m = mark_list[i]
@@ -112,14 +105,27 @@ document.querySelector('button.show_list_btn').addEventListener('click', functio
   <td id="element_${n}_tag">${t}</td>
   <td id="element_${n}_mark">${m}</td>
   <td id="element_${n}_coefficient">${c}</td>
+  <td><button class="btn btn-danger" onclick="DeleteElement(${n})">&#10060;</button></td>
   </tr>      
   `)
     n++
   }
-})
-document.querySelector('button.clear_list_btn').addEventListener('click', function (e) {
-  tag_list = []
-  mark_list = []
-  coefficient_list = []
-  alert("Список удалён!")
-})
+}
+
+function ClearMarks() {
+  if (confirm("Вы действительно хотите удалить все оценки?") == true) {
+    divisible = 0
+    divider = 0
+    n = 1
+    document.getElementById("tag").value = ""
+    document.getElementById("mark").value = ""
+    document.getElementById("coefficient").value = ""
+    document.querySelector('.list').innerHTML = ""
+    document.getElementById("middle_mark").innerHTML = `Средний балл: 0.`
+    document.getElementById("final_mark").innerHTML = `Итоговая оценка: 0.`
+    document.getElementById("final_mark").style.color = "black"
+    tag_list = []
+    mark_list = []
+    coefficient_list = []
+  }
+}
