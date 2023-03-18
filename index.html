@@ -42,7 +42,7 @@
                     <button class="btn btn-success mt-3" onclick="AddMark()">Добавить</button>
                     <button class="btn btn-danger mt-3" onclick="ClearMarks()">Очистить всё</button>
                 </div>
-                <div class="col-xl-6 col-md-6 col-sm-12">
+                <div class="col-xl-6 col-md-6 col-sm-12" id="mobile-block-add">
                     <h4>Результат:</h4>
                     <div class="mt-5">
                         <table class="marks table align-middle text-center">
@@ -85,6 +85,10 @@
         window.onload = function () {
             document.getElementById("copyright").innerHTML = `© ${new Date().getUTCFullYear()} Eugene Blogs Company`
         };
+        
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+            document.getElementById("mobile-block-add").classList.add("mt-5")
+        }
         
         var timer;
 var counter = 0;
