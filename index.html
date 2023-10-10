@@ -231,89 +231,93 @@
             let middle = eval(divisible_copy / divider_copy)
             middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
             let rounded = Math.round(middle)
-            if (user_mark == "5") {
-                if (Number(user_mark) <= rounded) {
-                    alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
+            if (rounded == 5 || rounded == 4 || rounded == 3 || rounded == 2) {
+                if (user_mark == "5") {
+                    if (Number(user_mark) <= rounded) {
+                        alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
+                    } else {
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 5
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_5++
+                        }
+                        alert(`До ${user_mark} вам нужно ${count_5} пятёрок.`)
+                    }
+                } else if (user_mark == "4") {
+                    if (Number(user_mark) <= rounded) {
+                        alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
+                    } else {
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 5
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_5++
+                        }
+                        divisible_copy = divisible
+                        divider_copy = divider
+                        middle = eval(divisible_copy / divider_copy)
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        rounded = Math.round(middle)
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 4
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_4++
+                        }
+                        alert(`До ${user_mark} вам нужно ${count_5} пятёрок или ${count_4} четвёрок.`)
+                    }
+                } else if (user_mark == "3") {
+                    if (Number(user_mark) <= rounded) {
+                        alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
+                    } else {
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 5
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_5++
+                        }
+                        divisible_copy = divisible
+                        divider_copy = divider
+                        middle = eval(divisible_copy / divider_copy)
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        rounded = Math.round(middle)
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 4
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_4++
+                        }
+                        divisible_copy = divisible
+                        divider_copy = divider
+                        middle = eval(divisible_copy / divider_copy)
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        rounded = Math.round(middle)
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 3
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_3++
+                        }
+                        alert(`До ${user_mark} вам нужно ${count_5} пятёрок, ${count_4} четвёрок или ${count_3} троек.`)
+                    }
                 } else {
-                    while (rounded != Number(user_mark)) {
-                        divisible_copy += 5
-                        divider_copy += 1
-                        middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
-                        rounded = Math.round(middle)
-                        count_5++
-                    }
-                    alert(`До ${user_mark} вам нужно ${count_5} пятёрок.`)
-                }
-            } else if (user_mark == "4") {
-                if (Number(user_mark) <= rounded) {
-                    alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
-                } else {
-                    while (rounded != Number(user_mark)) {
-                        divisible_copy += 5
-                        divider_copy += 1
-                        middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
-                        rounded = Math.round(middle)
-                        count_5++
-                    }
-                    divisible_copy = divisible
-                    divider_copy = divider
-                    middle = eval(divisible_copy / divider_copy)
-                    middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
-                    rounded = Math.round(middle)
-                    while (rounded != Number(user_mark)) {
-                        divisible_copy += 4
-                        divider_copy += 1
-                        middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
-                        rounded = Math.round(middle)
-                        count_4++
-                    }
-                    alert(`До ${user_mark} вам нужно ${count_5} пятёрок или ${count_4} четвёрок.`)
-                }
-            } else if (user_mark == "3") {
-                if (Number(user_mark) <= rounded) {
-                    alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
-                } else {
-                    while (rounded != Number(user_mark)) {
-                        divisible_copy += 5
-                        divider_copy += 1
-                        middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
-                        rounded = Math.round(middle)
-                        count_5++
-                    }
-                    divisible_copy = divisible
-                    divider_copy = divider
-                    middle = eval(divisible_copy / divider_copy)
-                    middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
-                    rounded = Math.round(middle)
-                    while (rounded != Number(user_mark)) {
-                        divisible_copy += 4
-                        divider_copy += 1
-                        middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
-                        rounded = Math.round(middle)
-                        count_4++
-                    }
-                    divisible_copy = divisible
-                    divider_copy = divider
-                    middle = eval(divisible_copy / divider_copy)
-                    middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
-                    rounded = Math.round(middle)
-                    while (rounded != Number(user_mark)) {
-                        divisible_copy += 3
-                        divider_copy += 1
-                        middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
-                        rounded = Math.round(middle)
-                        count_3++
-                    }
-                    alert(`До ${user_mark} вам нужно ${count_5} пятёрок, ${count_4} четвёрок или ${count_3} троек.`)
+                    alert("Введите требуемое значение.")
                 }
             } else {
-                alert("Введите требуемое значение.")
+                alert("Текущая отметка не соответствует 5-бальной системе оценивания.")
             }
         }
     </script>
