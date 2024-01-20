@@ -222,16 +222,17 @@
         }
 
         function CountMarks() {
-            let user_mark = prompt("Введите желаемую оценку (3, 4 или 5):")
+            let user_mark = prompt("Введите желаемую оценку (2, 3, 4 или 5):")
             let count_5 = 0
             let count_4 = 0
             let count_3 = 0
+            let count_2 = 0
             let divisible_copy = divisible
             let divider_copy = divider
             let middle = eval(divisible_copy / divider_copy)
             middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
             let rounded = Math.round(middle)
-            if (rounded == 5 || rounded == 4 || rounded == 3 || rounded == 2) {
+            if (rounded == 5 || rounded == 4 || rounded == 3 || rounded == 2 || rounded == 1) {
                 if (user_mark == "5") {
                     if (Number(user_mark) <= rounded) {
                         alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
@@ -312,6 +313,59 @@
                             count_3++
                         }
                         alert(`До ${user_mark} вам нужно ${count_5} пятёрок, ${count_4} четвёрок или ${count_3} троек.`)
+                    }
+                } else if (user_mark == "2") {
+                    if (Number(user_mark) <= rounded) {
+                        alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
+                    } else {
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 5
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_5++
+                        }
+                        divisible_copy = divisible
+                        divider_copy = divider
+                        middle = eval(divisible_copy / divider_copy)
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        rounded = Math.round(middle)
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 4
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_4++
+                        }
+                        divisible_copy = divisible
+                        divider_copy = divider
+                        middle = eval(divisible_copy / divider_copy)
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        rounded = Math.round(middle)
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 3
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_3++
+                        }
+                        divisible_copy = divisible
+                        divider_copy = divider
+                        middle = eval(divisible_copy / divider_copy)
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        rounded = Math.round(middle)
+                        while (rounded != Number(user_mark)) {
+                            divisible_copy += 2
+                            divider_copy += 1
+                            middle = eval(divisible_copy / divider_copy)
+                            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
+                            rounded = Math.round(middle)
+                            count_2++
+                        }
+                        alert(`До ${user_mark} вам нужно ${count_5} пятёрок, ${count_4} четвёрок, ${count_3} троек или ${count_2} двоек.`)
                     }
                 } else {
                     alert("Введите требуемое значение.")
