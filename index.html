@@ -111,7 +111,12 @@
                 formula += m + " * " + c + " + "
             }
             formula = formula.slice(0, -3);
-            formula = "(" + formula + ") / " + mark_list.length + " = " + document.getElementById("middle_mark").innerHTML.substr(14)
+            let all_coef = ""
+            for (let i = 0; i < coefficient_list.length; i++) {
+                all_coef += coefficient_list[i] + " + "
+            }
+            all_coef = all_coef.slice(0, -3);
+            formula = "(" + formula + ") / (" + all_coef + ") = " + document.getElementById("middle_mark").innerHTML.substr(14)
             alert(formula)
         }
 
