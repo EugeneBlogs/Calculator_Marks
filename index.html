@@ -45,6 +45,8 @@
                     <button class="btn btn-danger mt-3" onclick="ClearMarks()">Очистить всё</button>
                     <br>
                     <button class="btn btn-warning mt-3" onclick="CountMarks()">Количество оценок до ...</button>
+                    <br>
+                    <button class="btn btn-info mt-3" onclick="ShowFormula()">Показать формулу расчёта</button>
                 </div>
                 <div class="col-xl-6 col-md-6 col-sm-12" id="mobile-block-add">
                     <h4>Результат:</h4>
@@ -100,6 +102,18 @@
         let tag_list = []
         let mark_list = []
         let coefficient_list = []
+
+        function ShowFormula() {
+            let formula = ""
+            for (let i = 0; i < mark_list.length; i++) {
+                let m = mark_list[i]
+                let c = coefficient_list[i]
+                formula += m + " * " + c + " + "
+            }
+            formula = formula.slice(0, -3);
+            formula = "(" + formula + ") / " + mark_list.length + " = " + document.getElementById("middle_mark").innerHTML.substr(14)
+            alert(formula)
+        }
 
         function AddMark() {
             let t = document.getElementById("tag").value
