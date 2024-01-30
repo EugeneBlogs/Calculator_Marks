@@ -241,7 +241,6 @@
         }
 
         function CountMarks() {
-            let user_mark = prompt("Введите желаемую оценку (2, 3, 4 или 5):")
             let count_5 = 0
             let count_4 = 0
             let count_3 = 0
@@ -252,6 +251,7 @@
             middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
             let rounded = Math.round(middle)
             if (rounded == 5 || rounded == 4 || rounded == 3 || rounded == 2 || rounded == 1) {
+                let user_mark = prompt("Введите желаемую оценку (2, 3, 4 или 5):")
                 if (user_mark == "5") {
                     if (Number(user_mark) <= rounded) {
                         alert("Вы уже имеете данную оценку, или желаемая оценка ниже текущей.")
