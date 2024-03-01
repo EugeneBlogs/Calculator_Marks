@@ -142,7 +142,8 @@
         }
 
         function Razmah(array) {
-            return Number(Max(array)) - Number(Min(array))
+            let a = Number(Max(array)) - Number(Min(array))
+            return Math.round(a * Math.pow(10, 2)) / Math.pow(10, 2)
         }
 
         function Moda(array) {
@@ -154,20 +155,14 @@
             let results = []
             let count = 0
             while (a.length != 0) {
-                b = {}
-                for (x of a) {
-                    if (b[x]) {
-                        b[x] = b[x] + 1
-                    }
-                    else {
-                        b[x] = 1
-                    }
-                }
-                let maxKey, maxValue = 0
-                for (const [key, value] of Object.entries(b)) {
-                    if (value > maxValue) {
-                        maxValue = value
-                        maxKey = key
+                let frequency = {}
+                let maxValue = 0
+                let maxKey = 0
+                for (let v in a) {
+                    frequency[a[v]] = (frequency[a[v]] || 0) + 1
+                    if (frequency[a[v]] > maxValue) {
+                        maxValue = frequency[a[v]]
+                        maxKey = a[v]
                     }
                 }
                 if (results.length == 0) {
