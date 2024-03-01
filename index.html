@@ -46,7 +46,9 @@
                     <br>
                     <button class="btn btn-warning mt-3" onclick="CountMarks()">Количество оценок до ...</button>
                     <br>
-                    <button class="btn btn-info mt-3" onclick="ShowFormula()">Показать формулу расчёта</button>
+                    <button class="btn btn-info mt-3" onclick="ShowInfo()">Дополнительная информация</button>
+                    <br>
+                    <button class="btn btn-secondary mt-3" onclick="ShowFormula()">Показать формулу расчёта</button>
                 </div>
                 <div class="col-xl-6 col-md-6 col-sm-12" id="mobile-block-add">
                     <h4>Результат:</h4>
@@ -118,6 +120,113 @@
             all_coef = all_coef.slice(0, -3);
             formula = "(" + formula + ") / (" + all_coef + ") = " + document.getElementById("middle_mark").innerHTML.substr(14)
             alert(formula)
+        }
+
+        function ShowInfo() {
+            let copy_marks = []
+            for (let i = 0; i < mark_list.length; i++) {
+                copy_marks.push(mark_list[i])
+            }
+            copy_marks.sort(Sort)
+            alert(`Упорядоченный ряд: ${copy_marks}.\nМинимум: ${Min(copy_marks)}.\nМаксимум: ${Max(copy_marks)}.\nРазмах: ${Razmah(copy_marks)}\nМода: ${Moda(copy_marks)}.\nМедиана: ${Mediana(copy_marks)}.\nДисперсия: ${Dispersiya(copy_marks)}.`)
+        }
+
+        function Sort(a, b) { return a - b }
+
+        function Min(array) {
+            return Math.min.apply(null, array)
+        }
+
+        function Max(array) {
+            return Math.max.apply(null, array)
+        }
+
+        function Razmah(array) {
+            return Number(Max(array)) - Number(Min(array))
+        }
+
+        function Moda(array) {
+            let a = []
+            for (let i = 0; i < array.length; i++) {
+                a.push(array[i])
+            }
+            let none_repeat = a.filter((item, index) => a.indexOf(item) === index)
+            let results = []
+            let count = 0
+            while (a.length != 0) {
+                b = {}
+                for (x of a) {
+                    if (b[x]) {
+                        b[x] = b[x] + 1
+                    }
+                    else {
+                        b[x] = 1
+                    }
+                }
+                let maxKey, maxValue = 0
+                for (const [key, value] of Object.entries(b)) {
+                    if (value > maxValue) {
+                        maxValue = value
+                        maxKey = key
+                    }
+                }
+                if (results.length == 0) {
+                    if (!results.includes(maxKey)) results.push(maxKey)
+                    count = maxValue
+                } else {
+                    if (maxValue == count) {
+                        if (!results.includes(maxKey)) results.push(maxKey)
+                    }
+                }
+                a.shift()
+            }
+            if (results.toString() === none_repeat.toString()) {
+                return "не обнаружена"
+            } else {
+                return results
+            }
+        }
+
+        function Mediana(array) {
+            let length = array.length
+            if (length > 1) {
+                if (length % 2 != 0) {
+                    let index = Math.round(length / 2)
+                    return array[index - 1]
+                } else {
+                    let index = length / 2
+                    index--
+                    let a = Number(array[index])
+                    let b = Number(array[index + 1])
+                    let c = a + b
+                    return c / 2
+                }
+            } else {
+                return "не обнаружена"
+            }
+        }
+
+        function Dispersiya(array) {
+            let srednee = 0
+            let chislitel = 0
+            let znamenatel = 0
+            for (let i = 0; i < mark_list.length; i++) {
+                let pred = Number(mark_list[i]) * Number(coefficient_list[i])
+                chislitel += pred
+                znamenatel += Number(coefficient_list[i])
+            }
+            srednee = chislitel / znamenatel
+            srednee = Math.round(srednee * Math.pow(10, 2)) / Math.pow(10, 2)
+            let chislitel_dispersii = 0
+            for (let i = 0; i < mark_list.length; i++) {
+                let a = Number(mark_list[i]) - Number(srednee)
+                let b = Math.pow(a, 2)
+                let c = Number(b) * Number(coefficient_list[i])
+                chislitel_dispersii += c
+            }
+            let result = chislitel_dispersii / znamenatel
+            result = Math.round(result * Math.pow(10, 2)) / Math.pow(10, 2)
+            return result
         }
 
         function AddMark() {
