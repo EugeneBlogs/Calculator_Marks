@@ -48,7 +48,8 @@
                     <br>
                     <button class="btn btn-info mt-3" onclick="ShowInfo()">Дополнительная информация</button>
                     <br>
-                    <button class="btn btn-secondary mt-3" onclick="ShowFormula()">Показать формулу расчёта среднего значения</button>
+                    <button class="btn btn-secondary mt-3" onclick="ShowFormula()">Показать формулу расчёта среднего
+                        значения</button>
                 </div>
                 <div class="col-xl-6 col-md-6 col-sm-12" id="mobile-block-add">
                     <h4>Результат:</h4>
@@ -69,6 +70,21 @@
                         </table>
                         <h3 class="mt-5" id="middle_mark">Средний балл: 0.</h3>
                         <h3 id="final_mark">Итоговая оценка: 0.</h3>
+                    </div>
+                    <h4 class="mt-5">Таблица распределения:</h4>
+                    <div class="mt-5">
+                        <div class="table-responsive">
+                            <table class="distribution table table-bordered align-middle text-center">
+                                <tbody class="list_distribution">
+                                    <tr class="number_distribution">
+                                        <th class="table-warning">X (число)</th>
+                                    </tr>
+                                    <tr class="count_distribution">
+                                        <th class="table-warning">M (количество)</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,6 +121,33 @@
         let mark_list = []
         let coefficient_list = []
 
+        function UpdateTable() {
+            let const_number = '<th class="table-warning">X (число)</th>'
+            let const_count = '<th class="table-warning">M (количество)</th>'
+            let text_number = ''
+            let text_count = ''
+            let numbers = {}
+            let copy = []
+            for (let i = 0; i < mark_list.length; i++) {
+                copy.push(mark_list[i])
+            }
+            copy.sort(Sort)
+            for (let i = 0, j = copy.length; i < j; i++) {
+                numbers[copy[i]] = (numbers[copy[i]] || 0) + 1
+            }
+            for (let index in numbers) {
+                if (index < 0) {
+                    text_number = `\n<td>${index}</td>\n` + text_number
+                    text_count = `\n<td>${numbers[index]}</td>\n` + text_count
+                } else {
+                    text_number += `\n<td>${index}</td>`
+                    text_count += `\n<td>${numbers[index]}</td>`
+                }
+            }
+            document.querySelector('.number_distribution').innerHTML = const_number + text_number
+            document.querySelector('.count_distribution').innerHTML = const_count + text_count
+        }
+
         function ShowFormula() {
             let formula = ""
             for (let i = 0; i < mark_list.length; i++) {
@@ -112,12 +155,12 @@
                 let c = coefficient_list[i]
                 formula += m + " * " + c + " + "
             }
-            formula = formula.slice(0, -3);
+            formula = formula.slice(0, -3)
             let all_coef = ""
             for (let i = 0; i < coefficient_list.length; i++) {
                 all_coef += coefficient_list[i] + " + "
             }
-            all_coef = all_coef.slice(0, -3);
+            all_coef = all_coef.slice(0, -3)
             formula = "(" + formula + ") / (" + all_coef + ") = " + document.getElementById("middle_mark").innerHTML.substr(14)
             alert(formula)
         }
@@ -239,7 +282,7 @@
                 divisible += eval(m * c)
                 divider += eval(c)
                 let middle = eval(divisible / divider)
-                middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
                 document.getElementById("middle_mark").innerHTML = `Средний балл: ${middle}.`
                 let rounded = Math.round(middle)
                 document.getElementById("final_mark").innerHTML = `Итоговая оценка: ${rounded}.`
@@ -271,6 +314,7 @@
                 coefficient_list.push(document.getElementById(`element_${n}_coefficient`).innerHTML)
                 n++
             }
+            UpdateTable()
         }
 
         function DeleteElement(num) {
@@ -294,7 +338,7 @@
                 divisible += eval(m * c)
                 divider += eval(c)
                 let middle = eval(divisible / divider)
-                middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
                 document.getElementById("middle_mark").innerHTML = `Средний балл: ${middle}.`
                 let rounded = Math.round(middle)
                 document.getElementById("final_mark").innerHTML = `Итоговая оценка: ${rounded}.`
@@ -323,6 +367,7 @@
   `)
                 n++
             }
+            UpdateTable()
         }
 
         function ClearMarks() {
@@ -342,6 +387,7 @@
                 mark_list = []
                 coefficient_list = []
             }
+            UpdateTable()
         }
 
         function CountMarks() {
@@ -352,7 +398,7 @@
             let divisible_copy = divisible
             let divider_copy = divider
             let middle = eval(divisible_copy / divider_copy)
-            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+            middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
             let rounded = Math.round(middle)
             if (rounded == 5 || rounded == 4 || rounded == 3 || rounded == 2 || rounded == 1) {
                 let user_mark = prompt("Введите желаемую оценку (2, 3, 4 или 5):")
@@ -385,7 +431,7 @@
                         divisible_copy = divisible
                         divider_copy = divider
                         middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
                         rounded = Math.round(middle)
                         while (rounded < Number(user_mark)) {
                             divisible_copy += 4
@@ -412,7 +458,7 @@
                         divisible_copy = divisible
                         divider_copy = divider
                         middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
                         rounded = Math.round(middle)
                         while (rounded < Number(user_mark)) {
                             divisible_copy += 4
@@ -425,7 +471,7 @@
                         divisible_copy = divisible
                         divider_copy = divider
                         middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
                         rounded = Math.round(middle)
                         while (rounded < Number(user_mark)) {
                             divisible_copy += 3
@@ -452,7 +498,7 @@
                         divisible_copy = divisible
                         divider_copy = divider
                         middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
                         rounded = Math.round(middle)
                         while (rounded < Number(user_mark)) {
                             divisible_copy += 4
@@ -465,7 +511,7 @@
                         divisible_copy = divisible
                         divider_copy = divider
                         middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
                         rounded = Math.round(middle)
                         while (rounded < Number(user_mark)) {
                             divisible_copy += 3
@@ -478,7 +524,7 @@
                         divisible_copy = divisible
                         divider_copy = divider
                         middle = eval(divisible_copy / divider_copy)
-                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2);
+                        middle = Math.round(middle * Math.pow(10, 2)) / Math.pow(10, 2)
                         rounded = Math.round(middle)
                         while (rounded < Number(user_mark)) {
                             divisible_copy += 2
@@ -496,6 +542,7 @@
             } else {
                 alert("Текущая отметка не соответствует 5-бальной системе оценивания.")
             }
+            UpdateTable()
         }
     </script>
 </body>
