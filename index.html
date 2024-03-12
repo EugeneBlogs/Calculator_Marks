@@ -46,6 +46,8 @@
                     <br>
                     <button class="btn btn-warning mt-3" onclick="CountMarks()">Количество оценок до ...</button>
                     <br>
+                    <button class="btn btn-primary mt-3" onclick="Mistakes()" disabled>Право на ошибку (СКОРО)</button>
+                    <br>
                     <button class="btn btn-info mt-3" onclick="ShowInfo()">Дополнительная информация</button>
                     <br>
                     <button class="btn btn-secondary mt-3" onclick="ShowFormula()">Показать формулу расчёта среднего
@@ -543,6 +545,10 @@
                 alert("Текущая отметка не соответствует 5-бальной системе оценивания.")
             }
             UpdateTable()
+        }
+
+        function Mistakes() {
+            
         }
     </script>
 </body>
