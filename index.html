@@ -45,7 +45,6 @@
                     <button class="btn btn-danger mt-3" onclick="ClearMarks()">Очистить всё</button>
                     <br>
                     <button class="btn btn-warning mt-3" onclick="CountMarks()">Количество оценок до ...</button>
-                    <br>
                     <button class="btn btn-primary mt-3" onclick="Mistakes()">Право на ошибку</button>
                     <br>
                     <button class="btn btn-info mt-3" onclick="ShowInfo()">Дополнительная информация</button>
@@ -568,7 +567,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 4) count_4++
+                    if (round > 4) count_4++
                 }
                 chisl = divisible_copy
                 znam = divider_copy
@@ -580,7 +579,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 4) count_3++
+                    if (round > 4) count_3++
                 }
                 chisl = divisible_copy
                 znam = divider_copy
@@ -592,7 +591,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 4) count_2++
+                    if (round > 4) count_2++
                 }
                 chisl = divisible_copy
                 znam = divider_copy
@@ -604,7 +603,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 4) count_1++
+                    if (round > 4) count_1++
                 }
                 alert(`Вы можете получить ещё ${count_4} четвёрок, ${count_3} троек, ${count_2} двоек или ${count_1} единиц.`)
             } else if (rounded == 4) {
@@ -618,7 +617,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 3) count_3++
+                    if (round > 3) count_3++
                 }
                 chisl = divisible_copy
                 znam = divider_copy
@@ -630,7 +629,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 3) count_2++
+                    if (round > 3) count_2++
                 }
                 chisl = divisible_copy
                 znam = divider_copy
@@ -642,7 +641,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 3) count_1++
+                    if (round > 3) count_1++
                 }
                 alert(`Вы можете получить ещё ${count_3} троек, ${count_2} двоек или ${count_1} единиц.`)
             } else if (rounded == 3) {
@@ -656,7 +655,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 2) count_2++
+                    if (round > 2) count_2++
                 }
                 chisl = divisible_copy
                 znam = divider_copy
@@ -668,7 +667,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 2) count_1++
+                    if (round > 2) count_1++
                 }
                 alert(`Вы можете получить ещё ${count_2} двоек или ${count_1} единиц.`)
             } else if (rounded == 2) {
@@ -682,7 +681,7 @@
                     sred = eval(chisl / znam)
                     sred = Math.round(sred * Math.pow(10, 2)) / Math.pow(10, 2)
                     round = Math.round(sred)
-                    if (round != 1) count_1++
+                    if (round > 1) count_1++
                 }
                 alert(`Вы можете получить ещё ${count_1} единиц.`)
             } else if (rounded == 1) {
