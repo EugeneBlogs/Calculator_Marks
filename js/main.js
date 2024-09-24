@@ -66,7 +66,10 @@ function ShowInfo() {
         copy_marks.push(mark_list[i])
     }
     copy_marks.sort(Sort)
-    document.getElementById("text_upor_column").innerHTML = copy_marks
+    if (copy_marks.length == 0)
+        document.getElementById("text_upor_column").innerHTML = "отсутствует"
+    else
+        document.getElementById("text_upor_column").innerHTML = copy_marks
     document.getElementById("text_min").innerHTML = Min(copy_marks)
     document.getElementById("text_max").innerHTML = Max(copy_marks)
     document.getElementById("text_razmah").innerHTML = Razmah(copy_marks)
@@ -140,6 +143,8 @@ function Moda(array) {
         }
         a.shift()
     }
+    if (results.length == 0)
+        results.push("не определена")
     return results
 }
 
