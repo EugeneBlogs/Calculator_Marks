@@ -14,6 +14,162 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+function UpdateTable() {
+    let const_number = '<th class="table-danger">X (число)</th>'
+    let const_count = '<th class="table-danger">M (количество)</th>'
+    let text_number = ''
+    let text_count = ''
+    let numbers = {}
+    let copy = []
+    for (let i = 0; i < mark_list.length; i++) {
+        copy.push(mark_list[i])
+    }
+    copy.sort(Sort)
+    for (let i = 0, j = copy.length; i < j; i++) {
+        numbers[copy[i]] = (numbers[copy[i]] || 0) + 1
+    }
+    for (let index in numbers) {
+        if (index < 0) {
+            text_number = `\n<td>${index}</td>\n` + text_number
+            text_count = `\n<td>${numbers[index]}</td>\n` + text_count
+        } else {
+            text_number += `\n<td>${index}</td>`
+            text_count += `\n<td>${numbers[index]}</td>`
+        }
+    }
+    document.querySelector('.number_distribution').innerHTML = const_number + text_number
+    document.querySelector('.count_distribution').innerHTML = const_count + text_count
+}
+
+function ShowFormula() {
+    let formula = ""
+    for (let i = 0; i < mark_list.length; i++) {
+        let m = mark_list[i]
+        let c = coefficient_list[i]
+        formula += m + " * " + c + " + "
+    }
+    formula = formula.slice(0, -3)
+    let all_coef = ""
+    for (let i = 0; i < coefficient_list.length; i++) {
+        all_coef += coefficient_list[i] + " + "
+    }
+    all_coef = all_coef.slice(0, -3)
+    formula = `<span class="text-danger">(${formula})</span> / <span class="text-warning">(${all_coef})</span> = <span class="text-success">${document.getElementById("middle_mark").innerHTML}</span>`
+    document.getElementById("text_formula").innerHTML = formula
+    let modal = new bootstrap.Modal(document.getElementById("modal_formula"))
+    modal.show()
+}
+
+function ShowInfo() {
+    let copy_marks = []
+    for (let i = 0; i < mark_list.length; i++) {
+        copy_marks.push(mark_list[i])
+    }
+    copy_marks.sort(Sort)
+    document.getElementById("text_upor_column").innerHTML = copy_marks
+    document.getElementById("text_min").innerHTML = Min(copy_marks)
+    document.getElementById("text_max").innerHTML = Max(copy_marks)
+    document.getElementById("text_razmah").innerHTML = Razmah(copy_marks)
+    document.getElementById("text_moda").innerHTML = Moda(copy_marks)
+    document.getElementById("text_mediana").innerHTML = Mediana(copy_marks)
+    document.getElementById("text_dispersia").innerHTML = Dispersiya(copy_marks)
+    let modal = new bootstrap.Modal(document.getElementById("modal_info"))
+    modal.show()
+}
+
+function Sort(a, b) { return a - b }
+
+function Min(array) {
+    return Math.min.apply(null, array)
+}
+
+function Max(array) {
+    return Math.max.apply(null, array)
+}
+
+function Razmah(array) {
+    let a = Number(Max(array)) - Number(Min(array))
+    return Math.round(a * Math.pow(10, 2)) / Math.pow(10, 2)
+}
+
+function Moda(array) {
+    let a = []
+    for (let i = 0; i < array.length; i++) {
+        a.push(array[i])
+    }
+    let none_repeat = a.filter((item, index) => a.indexOf(item) === index)
+    let results = []
+    let count = 0
+    while (a.length != 0) {
+        let frequency = {}
+        let maxValue = 0
+        let maxKey = 0
+        for (let v in a) {
+            frequency[a[v]] = (frequency[a[v]] || 0) + 1
+            if (frequency[a[v]] > maxValue) {
+                maxValue = frequency[a[v]]
+                maxKey = a[v]
+            }
+        }
+        if (results.length == 0) {
+            if (!results.includes(maxKey)) results.push(maxKey)
+            count = maxValue
+        } else {
+            if (maxValue == count) {
+                if (!results.includes(maxKey)) results.push(maxKey)
+            }
+        }
+        a.shift()
+    }
+    if (results.toString() === none_repeat.toString()) {
+        return "не обнаружена"
+    } else {
+        return results
+    }
+}
+
+function Mediana(array) {
+    let length = array.length
+    if (length > 1) {
+        if (length % 2 != 0) {
+            let index = Math.round(length / 2)
+            return array[index - 1]
+        } else {
+            let index = length / 2
+            index--
+            let a = Number(array[index])
+            let b = Number(array[index + 1])
+            let c = a + b
+            return c / 2
+        }
+    } else {
+        return "не обнаружена"
+    }
+}
+
+function Dispersiya(array) {
+    let srednee = 0
+    let chislitel = 0
+    let znamenatel = 0
+    for (let i = 0; i < mark_list.length; i++) {
+        let pred = Number(mark_list[i]) * Number(coefficient_list[i])
+        chislitel += pred
+        znamenatel += Number(coefficient_list[i])
+    }
+    srednee = chislitel / znamenatel
+    srednee = Math.round(srednee * Math.pow(10, 2)) / Math.pow(10, 2)
+    let chislitel_dispersii = 0
+    for (let i = 0; i < mark_list.length; i++) {
+        let a = Number(mark_list[i]) - Number(srednee)
+        let b = Math.pow(a, 2)
+        let c = Number(b) * Number(coefficient_list[i])
+        chislitel_dispersii += c
+    }
+    let result = chislitel_dispersii / znamenatel
+    result = Math.round(result * Math.pow(10, 2)) / Math.pow(10, 2)
+    return result
+}
+
 function UpdateStorage() {
     let result_marks = []
     for (let i = 0; i < mark_list.length; i++) {
@@ -70,6 +226,7 @@ function LoadStorage() {
     }
     document.getElementById("text_result").innerHTML = `История успешно загружена!`
     modal_result.show()
+    UpdateTable()
 }
 
 function AddMark() {
@@ -120,6 +277,7 @@ function AddMark() {
         n++
     }
     UpdateStorage()
+    UpdateTable()
 }
 
 function DeleteElement(num) {
@@ -173,6 +331,7 @@ function DeleteElement(num) {
         n++
     }
     UpdateStorage()
+    UpdateTable()
 }
 
 function ClearMarks() {
@@ -191,6 +350,7 @@ function ClearMarks() {
     mark_list = []
     coefficient_list = []
     UpdateStorage()
+    UpdateTable()
 }
 
 function ShowPrompt() {
