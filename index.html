@@ -39,8 +39,11 @@
                     <button class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#modal_confirm">Очистить
                         всё</button>
                     <br>
-                    <button class="btn btn-warning mt-3" onclick="ShowPrompt()">Количество оценок до ...</button>
-                    <button class="btn btn-success mt-3" onclick="Mistakes()">Право на ошибку</button>
+                    <button class="btn btn-warning mt-3" onclick="ShowPrompt()">Повышение оценки</button>
+                    <button class="btn btn-success mt-3" onclick="Mistakes()">Понижение оценки</button>
+                    <br>
+                    <button class="btn btn-info mt-3" onclick="ShowInfo()">Дополнительная информация</button>
+                    <button class="btn btn-secondary mt-3" onclick="ShowFormula()">Формула</button>
                 </div>
                 <div class="col-xl-6 col-md-6 col-sm-12 mt-5">
                     <h4>Результат:</h4>
@@ -62,6 +65,21 @@
                         <div class="text-end">
                             <h3 class="mt-5">Средний балл: <span id="middle_mark">0</span>.</h3>
                             <h3 id="final_mark_block">Итоговая оценка: <span id="final_mark">0</span>.</h3>
+                        </div>
+                    </div>
+                    <h4 class="mt-5">Таблица распределения:</h4>
+                    <div class="mt-5">
+                        <div class="table-responsive">
+                            <table class="distribution table table-bordered align-middle text-center">
+                                <tbody class="list_distribution">
+                                    <tr class="number_distribution">
+                                        <th class="table-danger">X (число)</th>
+                                    </tr>
+                                    <tr class="count_distribution">
+                                        <th class="table-danger">M (количество)</th>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -170,6 +188,45 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal_info" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title text-info">Дополнительная информация</h2>
+                </div>
+                <div class="modal-body">
+                    <h4>Упорядоченный ряд: <span class="text-danger" id="text_upor_column">Ответ</span>.</h4>
+                    <h4 class="mt-2">Минимум: <span class="text-danger" id="text_min">Ответ</span>.</h4>
+                    <h4 class="mt-2">Максимум: <span class="text-danger" id="text_max">Ответ</span>.</h4>
+                    <h4 class="mt-2">Размах: <span class="text-danger" id="text_razmah">Ответ</span>.</h4>
+                    <h4 class="mt-2">Мода: <span class="text-danger" id="text_moda">Ответ</span>.</h4>
+                    <h4 class="mt-2">Медиана: <span class="text-danger" id="text_mediana">Ответ</span>.</h4>
+                    <h4 class="mt-2">Дисперсия: <span class="text-danger" id="text_dispersia">Ответ</span>.</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_formula" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title text-secondary">Формула расчёта среднего значения</h2>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center" id="text_formula">Результат</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
 </body>
