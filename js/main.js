@@ -70,6 +70,8 @@ function ShowInfo() {
     document.getElementById("text_min").innerHTML = Min(copy_marks)
     document.getElementById("text_max").innerHTML = Max(copy_marks)
     document.getElementById("text_razmah").innerHTML = Razmah(copy_marks)
+    document.getElementById("text_sum").innerHTML = Summa(copy_marks)
+    document.getElementById("text_geom").innerHTML = Geometry(copy_marks)
     document.getElementById("text_moda").innerHTML = Moda(copy_marks)
     document.getElementById("text_mediana").innerHTML = Mediana(copy_marks)
     document.getElementById("text_dispersia").innerHTML = Dispersiya(copy_marks)
@@ -90,6 +92,23 @@ function Max(array) {
 function Razmah(array) {
     let a = Number(Max(array)) - Number(Min(array))
     return Math.round(a * Math.pow(10, 2)) / Math.pow(10, 2)
+}
+
+function Summa(array) {
+    let sum = 0
+    array.forEach(element => {
+        sum += Number(element)
+    });
+    return sum
+}
+
+function Geometry(array) {
+    let count = array.length
+    let proizvedenie = 1
+    array.forEach(element => {
+        proizvedenie *= Number(element)
+    });
+    return Math.round(Math.pow(proizvedenie, 1 / count) * Math.pow(10, 4)) / Math.pow(10, 4)
 }
 
 function Moda(array) {
@@ -121,11 +140,7 @@ function Moda(array) {
         }
         a.shift()
     }
-    if (results.toString() === none_repeat.toString()) {
-        return "не обнаружена"
-    } else {
-        return results
-    }
+    return results
 }
 
 function Mediana(array) {
