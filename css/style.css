@@ -23,7 +23,8 @@ body {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 footer {
